@@ -4,5 +4,4 @@
   become: true
   tasks:
     -name: Execute the script
-     ansible.builtin.shell: 
-       new_users.sh
+     command sh new_users.sh
