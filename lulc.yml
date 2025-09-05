@@ -3,4 +3,4 @@
   become: true
   tasks:
       - Execute the script
-        command: sh /new_student.sh
+        command: sh new_student.sh
