@@ -2,5 +2,5 @@
 - hosts: test_servers
   become: true
   tasks:
-      - Execute the script
-        command: sh new_users.sh
+     -name: Execute the script
+      command sh new_student.sh
