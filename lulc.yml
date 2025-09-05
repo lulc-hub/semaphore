@@ -2,5 +2,6 @@
 - hosts: lulc_lab
   become: true
   tasks:
-    -name: Execute the script
-     ansible.builtin.shell:new_users.sh
+    - name: Execute the script
+      ansible.builtin.shell:
+        cmd: new_users.sh
