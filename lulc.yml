@@ -5,4 +5,4 @@
   tasks:
     -name: Execute the script
      ansible.builtin.shell: 
-       new_users.sh >> userslog.txt
+       new_users.sh
