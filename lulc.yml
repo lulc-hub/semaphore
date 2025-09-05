@@ -1,6 +1,8 @@
 ---
-- hosts: test_client
+- nane: run use script
+  hosts: test_client
   become: true
   tasks:
     -name: Execute the script
-     ansible.builtin.shell: new_users.sh >> userslog.txt
+     ansible.builtin.shell: 
+       new_users.sh >> userslog.txt
