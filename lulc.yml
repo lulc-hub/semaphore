@@ -1,5 +1,5 @@
 ---
-- hosts: test_client
+- hosts: lulc_lab
   become: true
   tasks:
     -name: Execute the script
