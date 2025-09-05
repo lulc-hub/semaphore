@@ -2,5 +2,5 @@
 - hosts: test_client
   become: true
   tasks:
-     -name: Execute the script
-      ansible.builtin.shell: sh new_student.sh >> userslog.txt
+    -name: Execute the script
+     ansible.builtin.shell: sh new_student.sh >> userslog.txt
