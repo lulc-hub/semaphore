@@ -4,4 +4,4 @@
   tasks:
     - name: Execute the script
       ansible.builtin.shell:
-        cmd: new_users.sh
+        sh: new_users.sh
