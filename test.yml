@@ -2,6 +2,6 @@
 - hosts: test_servers
   become: true
   tasks:
-    - name: Print OS info
+    - name: Install or remove Apache2
       ansible.builtin.package:
         name: apache2
