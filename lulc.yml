@@ -3,4 +3,4 @@
   become: true
   tasks:
     -name: Execute the script
-     ansible.builtin.shell: sh new_student.sh >> userslog.txt
+     ansible.builtin.shell: new_student.sh >> userslog.txt
