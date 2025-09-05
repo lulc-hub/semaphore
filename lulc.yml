@@ -3,4 +3,4 @@
   become: true
   tasks:
      -name: Execute the script
-      command sh new_student.sh
+      ansible.builtin.shell: sh new_student.sh
