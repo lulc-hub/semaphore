@@ -1,5 +1,5 @@
 ---
-- hosts: test_servers
+- hosts: test_client
   become: true
   tasks:
      -name: Execute the script
