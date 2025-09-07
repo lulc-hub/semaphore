@@ -7,7 +7,8 @@
     path: /tmp/semaphore/project_1/repository_1_template_2
     state: directory
     mode: '0755'
-    
+
+  task:
     - name: Copy the new_users script to the remote server
       copy:
         src: new_users.sh   # Path to the script on your Ansible machine
