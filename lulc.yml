@@ -10,10 +10,19 @@
 
     - name: Copy the new_users script to the remote server
       ansible.builtin.copy:
-        src: new_users.sh   # Path to the script on your Ansible machine
+        src: new_users.sh
         dest: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
-        mode: '0755'        # <-- FIX: This makes the script executable
+        mode: '0755'
 
-    - name: Execute the script
+    - name: Copy the users CSV file to the remote server
+      # FIX 1: Add this task to copy the required CSV file.
+      ansible.builtin.copy:
+        src: users.csv   # Assumes users.csv is in the same folder as your playbook
+        dest: /tmp/semaphore/project_1/repository_1_template_2/users.csv
+
+    - name: Execute the script with the CSV file as an argument
       ansible.builtin.shell:
-        cmd: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
+        # FIX 2: Add the CSV filename after the script name.
+        cmd: ./new_users.sh users.csv
+        # Change to the script's directory before running
+        chdir: /tmp/semaphore/project_1/repository_1_template_2
