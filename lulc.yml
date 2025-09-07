@@ -2,5 +2,11 @@
 - hosts: lulc_lab
   become: true
   tasks:
+    - name: Copy the new_users script to the remote server
+      copy:
+        src: new_users.sh   # Path to the script on your Ansible machine
+        dest: /tmp/new_users.sh # A temporary location on the remote server
+        mode: '0755'        # Makes the script executable
+
     - name: Execute the script
-      shell: new_users.sh
+      shell: /tmp/new_users.sh
