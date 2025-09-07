@@ -1,18 +1,19 @@
 ---
-  hosts: lu_lab
+- hosts: lu_lab
   become: true
   tasks:
-   - name: Create a directory if it does not exist
-  ansible.builtin.file:
-    path: /tmp/semaphore/project_1/repository_1_template_2
-    state: directory
-    mode: '0755'
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /tmp/semaphore/project_1/repository_1_template_2
+        state: directory
+        mode: '0755'
 
-  task:
     - name: Copy the new_users script to the remote server
-      copy:
+      ansible.builtin.copy:
         src: new_users.sh   # Path to the script on your Ansible machine
-        dest: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh # A temporary location on the remote server
+        dest: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
+        mode: '0755'        # <-- FIX: This makes the script executable
 
     - name: Execute the script
-      shell: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
+      ansible.builtin.shell:
+        cmd: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
