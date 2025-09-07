@@ -9,4 +9,4 @@
         mode: '0755'        # Makes the script executable
 
     - name: Execute the script
-      shell: /tmp/new_users.sh
+      shell: /tmp/semaphore/project_1/repository_1_template_2/new_users.sh
