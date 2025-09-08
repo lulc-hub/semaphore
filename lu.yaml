@@ -9,16 +9,18 @@
     - name: Display current working directory
       debug:
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
-    
-    - name: Get current files in directory
-      ansible.builtin.shell: ls -l
-      register: files_list
 
-    - name: Copy the new_users script
+    - name: Copying files
       ansible.builtin.copy:
-        src: users.sh users.csv
-        dest: /tmp/semaphore/project_1/repository_1_template_2/users.sh
-        mode: '0755'
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      loop:
+        - src: users.sh
+        - dest: /tmp/semaphore/project_1/repository_1_template_2
+        - src: users.csv
+        - dest: /tmp/semaphore/project_1/repository_1_template_2
+        - src: lu.yaml
+        - dest: /tmp/semaphore/project_1/repository_1_template_2
 
     - name: Execute the script
       ansible.builtin.shell:
