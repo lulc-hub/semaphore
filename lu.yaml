@@ -12,7 +12,7 @@
 
     - name: Find files you want to copy
       ansible.builtin.find:
-        paths: /
+        paths: .
         file_type: file
       register: files_output
 
