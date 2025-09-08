@@ -11,7 +11,7 @@
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
     
     - name: Get current files in directory
-      ansible.builtin.shell: ls -la
+      ansible.builtin.shell: ls
       register: files_list
 
     - name: Display files in current working directory
