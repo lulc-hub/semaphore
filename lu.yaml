@@ -10,10 +10,9 @@
       debug:
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
 
-    - name: Copying files
     - name: Find files you want to copy
       ansible.builtin.find:
-        paths: /tmp/semaphore/project_1/repository_1_template_2/
+        paths: /
         file_type: file
       register: files_output
 
