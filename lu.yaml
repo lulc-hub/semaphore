@@ -11,6 +11,7 @@
     - name: Copy the users CSV file
       ansible.builtin.copy:
         src: users.csv
+        dest: /tmp/semaphore/project_1/repository_1_template_2/users.csv
         mode: '0755'
 
     # --- ADD THIS DEBUG BLOCK ---
