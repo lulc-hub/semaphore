@@ -11,16 +11,17 @@
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
 
     - name: Copying files
+    - name: Find files you want to copy
+      ansible.builtin.find:
+        paths: /tmp/semaphore/project_1/repository_1_template_2/
+        file_type: file
+      register: files_output
+
+    - name: Copy the files
       ansible.builtin.copy:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-      loop:
-        - src: users.sh
-        - dest: /tmp/semaphore/project_1/repository_1_template_2
-        - src: users.csv
-        - dest: /tmp/semaphore/project_1/repository_1_template_2
-        - src: lu.yaml
-        - dest: /tmp/semaphore/project_1/repository_1_template_2
+        src: "{{ item.path }}"
+        dest: /tmp/semaphore/project_1/repository_1_template_2/
+      loop: "{{ files_output.files }}"
 
     - name: Execute the script
       ansible.builtin.shell:
