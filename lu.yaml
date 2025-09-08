@@ -5,6 +5,7 @@
     - name: Copy the new_users script
       ansible.builtin.copy:
         src: users.sh # Make sure this path is correct!
+        dest: /tmp/semaphore/project_1/repository_1_template_2/users.sh
         mode: '0755'
 
     - name: Copy the users CSV file
