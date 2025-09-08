@@ -5,19 +5,19 @@
     - name: Copy the new_users script
       ansible.builtin.copy:
         src: users.sh # Make sure this path is correct!
-        dest: /tmp/semaphore/project_1/repository_1_template_2/users.sh
+        dest: /tmp/semaphore/project_1/repository_1_template_2/files/users.sh
         mode: '0755'
 
     - name: Copy the users CSV file
       ansible.builtin.copy:
         src: users.csv
-        dest: /tmp/semaphore/project_1/repository_1_template_2/users.csv
+        dest: /tmp/semaphore/project_1/repository_1_template_2/files/users.csv
         mode: '0755'
 
     # --- ADD THIS DEBUG BLOCK ---
     - name: DEBUG - Show the script that was copied to the remote server
       ansible.builtin.command:
-        cmd: cat /tmp/semaphore/project_1/repository_1_template_2/users.sh
+        cmd: cat /tmp/semaphore/project_1/repository_1_template_2/files/users.sh
       register: script_contents
 
     - name: DEBUG - Print the script contents for verification
