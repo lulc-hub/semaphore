@@ -2,6 +2,14 @@
 - hosts: test
   become: true
   tasks:
+    - name: Get current working directory
+      ansible.builtin.shell: pwd
+       register: current_working_directory
+
+    - name: Display current working directory
+      debug:
+       msg: "The current working directory is: {{ current_working_directory.stdout }}"
+
     - name: Execute the script
       ansible.builtin.shell:
         cmd: ./users.sh users.csv
