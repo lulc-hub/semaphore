@@ -9,6 +9,14 @@
     - name: Display current working directory
       debug:
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
+    
+    - name: Get current files in directory
+      ansible.builtin.shell: ls -la
+      register: files_list
+
+    - name: Display files in current working directory
+      debug:
+       msg: "The current working directory is: {{ files_list.stdout }}"
 
     - name: Execute the script
       ansible.builtin.shell:
