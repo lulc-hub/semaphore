@@ -2,6 +2,12 @@
 - hosts: test
   become: true
   tasks:
+    - name: Clean up previous script files to ensure a fresh copy
+      # FIX: Add this task to delete the old directory first.
+      ansible.builtin.file:
+        path: /tmp/semaphore/project_1/repository_1_template_2
+        state: absent
+
     - name: Create a directory if it does not exist
       ansible.builtin.file:
         path: /tmp/semaphore/project_1/repository_1_template_2
@@ -15,14 +21,11 @@
         mode: '0755'
 
     - name: Copy the users CSV file to the remote server
-      # FIX 1: Add this task to copy the required CSV file.
       ansible.builtin.copy:
-        src: users.csv   # Assumes users.csv is in the same folder as your playbook
+        src: users.csv
         dest: /tmp/semaphore/project_1/repository_1_template_2/users.csv
 
     - name: Execute the script with the CSV file as an argument
       ansible.builtin.shell:
-        # FIX 2: Add the CSV filename after the script name.
         cmd: ./new_users.sh users.csv
-        # Change to the script's directory before running
         chdir: /tmp/semaphore/project_1/repository_1_template_2
