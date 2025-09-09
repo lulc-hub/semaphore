@@ -1,5 +1,5 @@
 ---
-- hosts: test_client
+- hosts: test
   become: true
   tasks:
     - name: Install multiple packages
