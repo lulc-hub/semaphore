@@ -1,0 +1,8 @@
+---
+- name: Remove unused dependencies on Debian-based systems
+  hosts: test_client
+  become: yes
+  tasks:
+    - name: Clean up unused dependencies
+      ansible.builtin.apt:
+        autoremove: yes
