@@ -1,0 +1,13 @@
+---
+- hosts: test_client
+  become: true
+  tasks:
+    - name: Install multiple packages
+      ansible.builtin.apt:
+        name:
+          - apache2
+          - curl
+          - tree
+          - unzip
+        state: present
+        update_cache: yes
