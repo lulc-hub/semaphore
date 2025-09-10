@@ -24,11 +24,11 @@
 
     - name: Change script permission
       file:
-        path: /users.sh
+        path: users.sh
         owner: semaphore
         group: semaphore
-        mod: 0755
-        chdir: /tmp/semaphore/project_1/repository_1_template_2
+        mode: a+x
+        #chdir: /tmp/semaphore/project_1/repository_1_template_2
         
     - name: Execute the script
       ansible.builtin.shell:
