@@ -24,7 +24,7 @@
 
     - name: Change script permission
       file:
-        path: users.sh
+        path: /tmp/semaphore/project_1/repository_1_template_2/users.sh
         owner: semaphore
         group: semaphore
         mode: a+x
