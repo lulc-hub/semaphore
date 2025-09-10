@@ -9,6 +9,7 @@
     - name: Display current working directory
       debug:
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
+       chdir: /tmp/semaphore/project_1/repository_1_template_2
 
     - name: Find files you want to copy
       ansible.builtin.find:
