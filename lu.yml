@@ -22,6 +22,14 @@
         dest: /tmp/semaphore/project_1/repository_1_template_2/
       loop: "{{ files_output.files }}"
 
+    - name: Change script permission
+      file:
+        path: /users.sh
+        owner: semaphore
+        group: semaphore
+        mod: 0755
+        chdir: /tmp/semaphore/project_1/repository_1_template_2
+        
     - name: Execute the script
       ansible.builtin.shell:
         cmd: ./users.sh users.csv
