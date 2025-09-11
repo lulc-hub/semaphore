@@ -9,7 +9,7 @@
     - name: Display current working directory
       debug:
        msg: "The current working directory is: {{ current_working_directory.stdout }}"
-       chdir: /tmp/semaphore/project_1/repository_1_template_2
+       chdir: /semaphoreg/project_1/repository_1_template_2
 
     - name: Find files you want to copy
       ansible.builtin.find:
@@ -20,18 +20,18 @@
     - name: Copy the files
       ansible.builtin.copy:
         src: "{{ item.path }}"
-        dest: /tmp/semaphore/project_1/repository_1_template_2/
+        dest: /semaphoreg/project_1/repository_1_template_2/
       loop: "{{ files_output.files }}"
 
     - name: Change script permission
       file:
-        path: /tmp/semaphore/project_1/repository_1_template_2/users.sh
+        path: /semaphoreg/project_1/repository_1_template_2/users.sh
         owner: semaphore
         group: semaphore
         mode: a+x
-        #chdir: /tmp/semaphore/project_1/repository_1_template_2
+        #chdir: /semaphoreg/project_1/repository_1_template_2
         
     - name: Execute the script
       ansible.builtin.shell:
         cmd: ./users.sh users.csv
-        chdir: /tmp/semaphore/project_1/repository_1_template_2
+        chdir: /semaphoreg/project_1/repository_1_template_2
