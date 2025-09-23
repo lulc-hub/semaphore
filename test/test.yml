@@ -3,5 +3,20 @@
   become: true
   tasks:
     - name: Print OS Info
+      ansible.builtin.debug:
+        msg: "This task just prints a message"
+      
+    - name: Gather system facts
+      ansible.builtin.setup:
+      
+    - name: Display OS information
+      ansible.builtin.debug:
+        msg: |
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          Kernel: {{ ansible_kernel }}
+          Hostname: {{ ansible_hostname }}
+
+    - name: Install apache2
       ansible.builtin.package:
         name: apache2
+        state: present
