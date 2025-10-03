@@ -12,6 +12,20 @@
     lab_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr Semaphore@LULC-ANSI-SRV"
 
   tasks:
+
+    - name: Check SSH key file accessibility on control node
+      ansible.builtin.stat:
+        path: "{{ ansible_ssh_private_key_file | default('/home/control_user/.ssh/semaphore_key') }}"
+      delegate_to: localhost
+      run_once: true
+      register: key_check
+      when: ansible_ssh_private_key_file is defined
+
+    - name: Debug SSH key file check
+      ansible.builtin.debug:
+        msg: "SSH key file {{ ansible_ssh_private_key_file | default('/home/control_user/.ssh/semaphore_key') }} exists: {{ key_check.stat.exists }}"
+      when: ansible_ssh_private_key_file is defined
+
     - name: Test SSH connectivity
       ansible.builtin.ping:
       register: ping_result
