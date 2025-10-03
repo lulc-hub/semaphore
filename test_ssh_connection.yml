@@ -1,6 +1,6 @@
 ---
 - name: Test SSH connection with specific username and password
-  hosts: lab1
+  hosts: lab_clients
   gather_facts: false
   vars:
     ansible_user: admin-linux
