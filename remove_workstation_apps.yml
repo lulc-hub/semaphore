@@ -1,5 +1,5 @@
 ---
-- name: Remove workstation setup (TeamViewer, SSH, dev tools)
+- name: Remove workstation setup (TeamViewer, dev tools)
   hosts: test
   become: yes
   become_method: sudo
