@@ -1,5 +1,5 @@
 ---
-- name: Remove workstation setup (TeamViewer, dev tools)
+- name: Remove workstation setup (TeamViewer, dev tools, excluding SSH) and reboot
   hosts: test
   become: yes
   become_method: sudo
@@ -111,4 +111,11 @@
     - name: Update apt cache after removals
       ansible.builtin.apt:
         update_cache: true
+        upgrade: dist
+      ignore_errors: true
+
+    - name: Reboot the system
+      ansible.builtin.reboot:
+        reboot_timeout: 100
+        connect_timeout: 60
       ignore_errors: true
