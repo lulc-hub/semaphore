@@ -1,6 +1,6 @@
 ---
 - name: Test SSH, create user semaphore, and copy SSH public key
-  hosts: lab1
+  hosts: lab_clients
   become: yes
   become_method: sudo
   become_user: root
