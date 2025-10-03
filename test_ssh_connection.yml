@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     ansible_user: admin-linux
-    ansible_password: Redlorry135!
+    ansible_password: 
   tasks:
     - name: Test SSH connectivity
       ansible.builtin.ping:
