@@ -1,0 +1,114 @@
+---
+- name: Remove workstation setup (TeamViewer, SSH, dev tools)
+  hosts: test
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: true
+
+  vars:
+    teamviewer_deb_path: "/tmp/teamviewer_amd64.deb"
+    base_packages:
+      - gcc
+      - gnat
+      - git
+      - default-jre
+      - default-jdk
+      - erlang
+      - nodejs
+      - make
+      - r-base
+      - r-cran-rstudioapi
+      - spyder
+      - flex
+      - bison
+      - sqlite3
+      - sqlite3-tools
+      - openjdk-17-jdk-headless
+      - xterm
+      - scrypt
+      - screen
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - wget
+      - curl
+      - llvm
+      - libncurses5-dev
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libffi-dev
+      - liblzma-dev
+      - code
+    docker_packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+  tasks:
+    - name: Remove TeamViewer
+      ansible.builtin.apt:
+        name: teamviewer
+        state: absent
+        purge: true
+      ignore_errors: true
+
+    - name: Remove TeamViewer .deb file
+      ansible.builtin.file:
+        path: "{{ teamviewer_deb_path }}"
+        state: absent
+      ignore_errors: true
+
+    - name: Remove general development/runtime packages
+      ansible.builtin.apt:
+        name: "{{ base_packages }}"
+        state: absent
+        purge: true
+      ignore_errors: true
+
+    - name: Remove Docker packages
+      ansible.builtin.apt:
+        name: "{{ docker_packages }}"
+        state: absent
+        purge: true
+      ignore_errors: true
+
+    - name: Remove Docker APT repository
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.asc]
+          https://download.docker.com/linux/ubuntu
+          {{ ansible_distribution_release | lower }} stable
+        filename: docker
+        state: absent
+      ignore_errors: true
+
+    - name: Remove Docker ASC key
+      ansible.builtin.file:
+        path: /etc/apt/keyrings/docker.asc
+        state: absent
+      ignore_errors: true
+
+    - name: Remove VS Code repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/code stable main
+        filename: vscode
+        state: absent
+      ignore_errors: true
+
+    - name: Remove Microsoft GPG key
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        state: absent
+      ignore_errors: true
+
+    - name: Update apt cache after removals
+      ansible.builtin.apt:
+        update_cache: true
+      ignore_errors: true
