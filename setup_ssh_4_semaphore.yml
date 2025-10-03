@@ -1,0 +1,49 @@
+---
+- name: Test SSH, create user semaphore, and copy SSH public key
+  hosts: lab1
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+  vars:
+    ansible_user: admin-linux
+    ansible_password: Redlorry135!
+    semaphore_password_hash: "$6$0Kn.7NaXyp8fA65i$ghrQV8s5PEolncJasvSrcmb3NsvdclMyZuXkKjm9ty9GesyrFofUa25zU4kT9BPSHSBO9u2S66OCzox2kmaBw."
+    semaphore_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr semaphore@LULC-ANSI-SRV"
+
+  tasks:
+    - name: Test SSH connectivity
+      ansible.builtin.ping:
+      register: ping_result
+      failed_when: ping_result.failed
+
+    - name: Display SSH connection result
+      ansible.builtin.debug:
+        msg: "SSH connection to {{ inventory_hostname }} as {{ ansible_user }}: {{ ping_result.ping }}"
+      when: ping_result.ping == 'pong'
+
+    - name: Create user semaphore
+      ansible.builtin.user:
+        name: semaphore
+        password: "{{ semaphore_password_hash }}"
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        state: present
+      when: ping_result.ping == 'pong'
+
+    - name: Ensure SSH directory exists for semaphore
+      ansible.builtin.file:
+        path: /home/semaphore/.ssh
+        state: directory
+        owner: semaphore
+        group: semaphore
+        mode: "0700"
+      when: ping_result.ping == 'pong'
+
+    - name: Copy SSH public key to semaphore's authorized_keys
+      ansible.posix.authorized_key:
+        user: semaphore
+        key: "{{ semaphore_ssh_public_key }}"
+        state: present
+      when: ping_result.ping == 'pong'
