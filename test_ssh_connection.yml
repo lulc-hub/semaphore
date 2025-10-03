@@ -1,0 +1,15 @@
+---
+- name: Test SSH connection with specific username and password
+  hosts: lab1
+  gather_facts: false
+  vars:
+    ansible_user: admin-linux
+    ansible_password: Redlorry135!
+  tasks:
+    - name: Test SSH connectivity
+      ansible.builtin.ping:
+      register: ping_result
+      failed_when: ping_result.failed
+    - name: Display SSH connection result
+      ansible.builtin.debug:
+        msg: "SSH connection to {{ inventory_hostname }} as {{ ansible_user }}: {{ ping_result.ping }}"
