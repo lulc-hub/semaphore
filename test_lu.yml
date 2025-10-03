@@ -167,3 +167,9 @@
         name: docker
         state: present
 
+    - name: Update apt cache after removals
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+      ignore_errors: true
+
