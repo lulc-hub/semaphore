@@ -8,7 +8,7 @@
   vars:
     ansible_user: admin-linux
     ansible_password: Redlorry135!
-    semaphore_password_hash: "$6$0Kn.7NaXyp8fA65i$ghrQV8s5PEolncJasvSrcmb3NsvdclMyZuXkKjm9ty9GesyrFofUa25zU4kT9BPSHSBO9u2S66OCzox2kmaBw."
+    semaphore_password_hash: "$6$cpIQkT/hFsQCy/eR$R4.TyIFMCZFAwbTJXiPZ.WYYm2bIPSYCPSAjkVJP3T.ZFNrEr2KBsxRfHiQjgHiZED1O6tpJnKIS9sw.qQBLQ0"
     semaphore_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr semaphore@LULC-ANSI-SRV"
 
   tasks:
