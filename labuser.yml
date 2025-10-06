@@ -1,6 +1,6 @@
 ---
 - name: Test SSH, create user lab, and copy SSH public key
-  hosts: lu_1
+  hosts: lab_clients
   become: yes
   become_method: sudo
   become_user: root
