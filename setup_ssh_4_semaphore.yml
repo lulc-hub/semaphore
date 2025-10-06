@@ -6,8 +6,8 @@
   become_user: root
   gather_facts: false
   vars:
-    ansible_user: admin-linux
-    ansible_password: Redlorry135!
+    ansible_user: admin-
+    ansible_password: !
     semaphore_password_hash: "$6$cpIQkT/hFsQCy/eR$R4.TyIFMCZFAwbTJXiPZ.WYYm2bIPSYCPSAjkVJP3T.ZFNrEr2KBsxRfHiQjgHiZED1O6tpJnKIS9sw.qQBLQ0"
     semaphore_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr semaphore@LULC-ANSI-SRV"
 
