@@ -1,15 +1,15 @@
 ---
 - name: Test SSH, create user lab, and copy SSH public key
-  hosts: lab1
+  hosts: lu_1
   become: yes
   become_method: sudo
   become_user: root
   gather_facts: false
   vars:
     #ansible_user: admin-linux
-    #ansible_password: Redlorry135!
+    #ansible_password: !
     lab_password_hash: "$6$P/hwM02g8hFlKdYo$N3F1.KwlS0Jiihykn88Qs549DDR3lkKuM7krwN4zvH7km5id8eC3U0mjvxMIboa3B1IMZ6RGxB2ENIuFPihmM0"
-    #lab_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr Semaphore@LULC-ANSI-SRV"
+    lab_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuYJV1wUnRkV+vtFaH7qbCb/xJbaAIxhqWIli/3bUzr Semaphore@LULC-ANSI-SRV"
 
   tasks:
     - name: Test SSH connectivity
